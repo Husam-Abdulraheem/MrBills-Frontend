@@ -1,7 +1,9 @@
 import { useState } from "react";
+import { useTranslation } from "react-i18next";
 import { demoStore } from "../../helpers/demoMockStore";
 
 export default function DemoBanner() {
+  const { t, i18n } = useTranslation();
   const [dismissed, setDismissed] = useState(() => {
     return sessionStorage.getItem("mrbills_demo_banner_dismissed") === "true";
   });
@@ -17,6 +19,14 @@ export default function DemoBanner() {
     demoStore.reset();
     window.location.reload();
   };
+
+  // Determine back link URL based on current language
+  const arabixLink =
+    i18n.language === "ar"
+      ? "https://www.arabixdev.com/ar"
+      : i18n.language === "tr"
+      ? "https://www.arabixdev.com/tr"
+      : "https://www.arabixdev.com/en";
 
   return (
     <aside
@@ -34,10 +44,13 @@ export default function DemoBanner() {
             >
               <path d="M12 2l2.4 7.4H22l-6 4.6 2.3 7.2-6.3-4.6-6.3 4.6 2.3-7.2-6-4.6h7.6z" />
             </svg>
-            <span>نسخة العرض التجريبية</span>
+            <span>{t("demo.bannerTag", "نسخة العرض التجريبية")}</span>
           </span>
           <span className="text-gray-300 hidden sm:inline text-[11px]">
-            تعمل بالكامل في المتصفح عبر بيانات تفاعلية (Mock Store)
+            {t(
+              "demo.bannerDesc",
+              "تعمل بالكامل في المتصفح عبر بيانات تفاعلية (Mock Store)"
+            )}
           </span>
         </div>
 
@@ -46,7 +59,7 @@ export default function DemoBanner() {
           <button
             onClick={handleReset}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-[#242b38] hover:bg-[#2d3748] text-gray-200 hover:text-white transition-all border border-gray-700 text-[11px]"
-            title="استعادة البيانات التجريبية الافتراضية"
+            title={t("demo.resetTooltip", "استعادة البيانات التجريبية الافتراضية")}
           >
             <svg
               className="w-3 h-3 text-gray-400"
@@ -61,13 +74,13 @@ export default function DemoBanner() {
                 d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"
               />
             </svg>
-            <span>استعادة البيانات</span>
+            <span>{t("demo.resetData", "استعادة البيانات")}</span>
           </button>
 
           <a
-            href="https://www.arabixdev.com"
+            href={arabixLink}
             className="inline-flex items-center gap-1 px-2.5 py-1 rounded bg-amber-500/15 hover:bg-amber-500/25 text-amber-300 hover:text-amber-200 transition-all border border-amber-500/30 text-[11px]"
-            title="العودة إلى موقع ارابكس ديف"
+            title={t("demo.backToArabixTooltip", "العودة إلى موقع ارابكس ديف")}
           >
             <span>Arabix Dev</span>
             <svg
@@ -88,7 +101,7 @@ export default function DemoBanner() {
           <button
             onClick={handleDismiss}
             className="text-gray-400 hover:text-white p-1 rounded hover:bg-white/10 transition-colors"
-            title="إخفاء الشريط"
+            title={t("demo.dismissTooltip", "إخفاء الشريط")}
             aria-label="Dismiss banner"
           >
             <svg

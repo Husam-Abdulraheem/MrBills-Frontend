@@ -15,7 +15,7 @@ import GroupPage from "./components/pages/main/GroupPage";
 import ProfilePage from "./components/pages/main/ProfilePage";
 import SubscriptionsPage from "./components/pages/auth/SubscriptionsPage";
 import ShareBillPage from "./components/others/ShareBillPage";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GroupContext } from "./helpers/Contexts/GroupContext";
 import { ProfileContext } from "./helpers/Contexts/ProfileContext";
 import RenewalSubscriptionsPage from "./components/pages/auth/RenewalSubscriptionsPage";
@@ -42,11 +42,22 @@ function App() {
   const { i18n: i18next } = useTranslation();
   const direction = i18next.language === "ar" ? "rtl" : "ltr";
 
+  // Sync language with URL if accessed via localized path (e.g., /ar/demo/mr-bills or /tr/demo/mr-bills)
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const match = window.location.pathname.match(/^\/(ar|en|tr)(\/|$)/i);
+      if (match && match[1] && i18next.language !== match[1].toLowerCase()) {
+        i18next.changeLanguage(match[1].toLowerCase());
+        localStorage.setItem("language", match[1].toLowerCase());
+      }
+    }
+  }, [i18next]);
+
   // Support both standalone hosting and subpath hosting (e.g. /demo/mr-bills or /ar/demo/mr-bills)
   const getBasePath = () => {
     if (typeof window === "undefined") return "";
     const pathname = window.location.pathname;
-    const match = pathname.match(/^(\/(ar|en|tr))?\/demo\/mr-bills/);
+    const match = pathname.match(/^(\/(ar|en|tr))?\/demo\/mr-bills/i);
     return match ? match[0] : "";
   };
 

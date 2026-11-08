@@ -189,7 +189,7 @@ function LoginPage() {
                     }}
                     className="w-full mt-3 rounded-lg py-2.5 md:py-3 bg-gray-800 text-yellow-400 font-bold hover:bg-gray-700 active:scale-[0.98] transition-all shadow-md flex items-center justify-center text-sm md:text-base border border-yellow-500/40"
                   >
-                    ⚡ الدخول الفوري للنسخة التجريبية (1-Click Demo)
+                    {t("demo.loginOneClickDemo", "⚡ الدخول الفوري للنسخة التجريبية (Demo)")}
                   </button>
 
                   <p className="text-gray-400 mt-4 md:mt-6 text-center text-xs md:text-sm">

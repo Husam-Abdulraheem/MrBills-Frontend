@@ -16,6 +16,12 @@ i18n
   .init({
     resources,
     lng: (() => {
+      if (typeof window !== 'undefined') {
+        const urlMatch = window.location.pathname.match(/^\/(ar|en|tr)(\/|$)/i);
+        if (urlMatch && urlMatch[1]) {
+          return urlMatch[1].toLowerCase();
+        }
+      }
       const saved = localStorage.getItem('language');
       if (saved) return saved;
       const browserLang = navigator.language?.split('-')[0]?.toLowerCase();

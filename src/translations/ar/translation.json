@@ -395,5 +395,17 @@
   },
   "confirmDeleteTitle": "تأكيد الحذف",
   "confirmDeleteMessage": "هل أنت متأكد أنك تريد حذف هذه الفاتورة؟ لا يمكن التراجع عن هذا الإجراء!",
-  "no": "لا"
+  "no": "لا",
+  "demo": {
+    "bannerTag": "نسخة العرض التجريبية",
+    "bannerDesc": "تعمل بالكامل في المتصفح عبر بيانات تفاعلية (Mock Store)",
+    "resetData": "استعادة البيانات",
+    "resetTooltip": "استعادة البيانات التجريبية الافتراضية",
+    "backToArabix": "Arabix Dev",
+    "backToArabixTooltip": "العودة إلى موقع ارابكس ديف",
+    "dismissTooltip": "إخفاء الشريط",
+    "oneClickDemo": "⚡ تجربة النسخة الحية فوراً (Demo)",
+    "loginOneClickDemo": "⚡ الدخول الفوري للنسخة التجريبية (Demo)",
+    "dataResetSuccess": "تمت استعادة البيانات التجريبية الافتراضية بنجاح"
+  }
 }

@@ -396,5 +396,17 @@
     "downloadApp": "Uygulamayı indir",
     "useWeb": "Web'i kullan",
     "installAppTip": "En iyi deneyim için Mr. Bills uygulamasını cihazınıza yüklemenizi öneririz"
+  },
+  "demo": {
+    "bannerTag": "Etkileşimli Canlı Demo",
+    "bannerDesc": "Tamamen tarayıcıda etkileşimli yerel verilerle çalışır",
+    "resetData": "Verileri Sıfırla",
+    "resetTooltip": "Varsayılan demo verilerini geri yükle",
+    "backToArabix": "Arabix Dev",
+    "backToArabixTooltip": "Arabix Dev sitesine dön",
+    "dismissTooltip": "Bandı gizle",
+    "oneClickDemo": "⚡ Canlı Demoyu Başlat (1-Tık)",
+    "loginOneClickDemo": "⚡ Anında Demo Girişi (1-Tık)",
+    "dataResetSuccess": "Demo verileri başarıyla varsayılana sıfırlandı"
   }
 }

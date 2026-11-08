@@ -287,7 +287,7 @@ function Introduction() {
                     }}
                     className="mt-2 text-xs md:text-sm text-gray-400 bg-gray-800/80 px-4 py-1.5 rounded-full border border-yellow-500/30 hover:text-yellow-400 transition-all"
                   >
-                    ⚡ تجربة النسخة الحية فوراً (1-Click Demo)
+                    {t("demo.oneClickDemo", "⚡ تجربة النسخة الحية فوراً (Demo)")}
                   </button>
                 </div>
               )}
