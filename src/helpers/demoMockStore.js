@@ -169,8 +169,21 @@ function saveState(state) {
 
 export const demoStore = {
   resetToDefault() {
-    saveState(INITIAL_STATE);
-    return INITIAL_STATE;
+    try {
+      localStorage.removeItem(STORAGE_KEY);
+      localStorage.removeItem("code");
+      localStorage.removeItem("members");
+      const cleanState = JSON.parse(JSON.stringify(INITIAL_STATE));
+      saveState(cleanState);
+      return cleanState;
+    } catch (err) {
+      console.error("Error in resetToDefault:", err);
+      return INITIAL_STATE;
+    }
+  },
+
+  reset() {
+    return this.resetToDefault();
   },
 
   login(email, password) {

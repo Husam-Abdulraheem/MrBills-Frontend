@@ -16,7 +16,18 @@ export default function DemoBanner() {
   };
 
   const handleReset = () => {
-    demoStore.reset();
+    try {
+      localStorage.removeItem("mrbills_demo_state");
+      localStorage.removeItem("code");
+      localStorage.removeItem("members");
+      demoStore.resetToDefault();
+    } catch (e) {
+      console.error("Reset error:", e);
+      localStorage.removeItem("mrbills_demo_state");
+    }
+    if (!localStorage.getItem("token")) {
+      localStorage.setItem("token", "mock-jwt-token-demo");
+    }
     window.location.reload();
   };
 
