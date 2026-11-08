@@ -9,7 +9,7 @@ function SettlementBillView(props) {
         {/* Upper Part */}
         <div className="flex justify-between">
             <p className="self-center opacity-60 text-[10px]">
-            {props.bill.createDate.split("T")[0]}
+            {(props.bill.createDate || props.bill.date || "").split("T")[0]}
             </p>
           <h2 className="text-lg font-bold">{props.bill.description}</h2>
         
@@ -18,7 +18,7 @@ function SettlementBillView(props) {
         {/* Middle Part */}
         <div className="flex justify-between">
             <p className="self-center text-[16px] font-bold">
-                {props.settlePrice[0].amount}
+                {props.settlePrice?.[0]?.amount || props.bill?.amount || 0}
                 {t("settlement.currency", "₺")}
             </p>
           <p className="text-[#ededed] opacity-60 text-[12px]">{props.bill.ownerName}</p>

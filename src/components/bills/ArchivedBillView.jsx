@@ -34,7 +34,7 @@ function ArchivedBillView(props) {
             <hr className="bg-white w-full my-3" />
             
             <div className="w-full flex justify-between items-center mt-2">
-                <p className="text-xs text-gray-400">  {props.bill.createDate.split("T")[0]} </p>
+                <p className="text-xs text-gray-400">  {(props.bill.createDate || props.bill.date || "").split("T")[0]} </p>
 
                 <HistoryDialog  log={props.bill.activityLogs}/>
             </div>

@@ -25,7 +25,7 @@ function MyBillView(props) {
 
   const shareBill = () => {
     const bill = props.bill;
-    const participantsText = bill.claimants
+    const participantsText = (bill.claimants || [])
       .map((c) => `${c.claimantName || t("participant")}: ${c.amount || 0} ₺`)
       .join(", ");
 
@@ -57,7 +57,7 @@ function MyBillView(props) {
     const billText = `
 ${randomMessage}
 
-📅 ${t("billDate")}: ${bill.createDate.split("T")[0]}
+📅 ${t("billDate")}: ${(bill.createDate || bill.date || "").split("T")[0]}
 
 ✅ ${t("openBill")}:
 
@@ -135,7 +135,7 @@ ${t("shareEnjoy")}
       <div className="flex items-center justify-between mt-4">
         <div className="flex items-center gap-1 text-xs text-gray-400">
           <HistoryDialog log={props.bill.activityLogs} />
-          <span>{props.bill.createDate.split("T")[0]}</span>
+          <span>{(props.bill.createDate || props.bill.date || "").split("T")[0]}</span>
         </div>
 
         <div className="flex gap-2">

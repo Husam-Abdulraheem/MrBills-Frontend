@@ -1,28 +1,30 @@
 /**
- * BillMate Demo Mock Store
- * Simulates backend operations, state persistence (localStorage), and calculations
+ * Mr. Bills Demo Mock Store
+ * Fully simulates backend operations, state persistence (localStorage), and calculations
  * for live portfolio demonstration without requiring an active backend server.
  */
 
-const STORAGE_KEY = "billmate_demo_state";
+const STORAGE_KEY = "mrbills_demo_state";
 
 const INITIAL_STATE = {
   user: {
     id: "usr_1",
     fullName: "Husam (Demo)",
-    email: "demo@billmate.com",
+    email: "demo@mrbills.com",
     iban: "TR330006100511123456789012",
   },
   group: {
     id: 1,
+    managerId: "usr_1",
+    code: "MB-8921",
     name: "Apartment Roommates 🏠",
-    code: "BM-8921",
     members: [
-      { id: "usr_1", fullName: "Husam (You)", email: "demo@billmate.com", iban: "TR330006100511123456789012", role: "Owner" },
-      { id: "usr_2", fullName: "Sarah Miller", email: "sarah@example.com", iban: "TR440006100511123456789033", role: "Member" },
-      { id: "usr_3", fullName: "Alex Chen", email: "alex@example.com", iban: "TR550006100511123456789044", role: "Member" },
-      { id: "usr_4", fullName: "Zaid Omar", email: "zaid@example.com", iban: "TR660006100511123456789055", role: "Member" },
+      { userId: "usr_1", id: "usr_1", fullName: "Husam (You)", email: "demo@mrbills.com", role: "Owner" },
+      { userId: "usr_2", id: "usr_2", fullName: "Sarah Miller", email: "sarah@example.com", role: "Member" },
+      { userId: "usr_3", id: "usr_3", fullName: "Alex Chen", email: "alex@example.com", role: "Member" },
+      { userId: "usr_4", id: "usr_4", fullName: "Zaid Omar", email: "zaid@example.com", role: "Member" },
     ],
+    isActive: true,
   },
   subscription: {
     id: 1,
@@ -30,63 +32,110 @@ const INITIAL_STATE = {
     package: 1,
     type: "Medium_5Users",
     isTrial: false,
+    isActive: true,
     isPaid: true,
     expiryDate: "2027-12-31T23:59:59",
   },
-  bills: [
+  // My Bills (Bills created by the current user: usr_1)
+  myBills: [
     {
-      id: 1,
+      billId: 101,
+      id: 101,
       description: "High-Speed Fiber Internet 🌐",
-      amount: 480,
-      date: "2026-11-01T12:00:00",
+      ownerName: "Husam (You)",
       billOwner: "Husam (You)",
-      ownerId: "usr_1",
-      iban: "TR330006100511123456789012",
-      isSettlement: false,
-      isPayed: false,
-      paidAmount: 240,
-      remainingAmount: 240,
-      debts: [
-        { id: 101, fromUserId: "usr_2", fromUserName: "Sarah Miller", toUserId: "usr_1", amount: 120, isPaid: true },
-        { id: 102, fromUserId: "usr_3", fromUserName: "Alex Chen", toUserId: "usr_1", amount: 120, isPaid: false },
-        { id: 103, fromUserId: "usr_4", fromUserName: "Zaid Omar", toUserId: "usr_1", amount: 120, isPaid: false },
+      createDate: "2026-11-01T12:00:00",
+      date: "2026-11-01T12:00:00",
+      total: 480,
+      amount: 480,
+      isRequired: false,
+      invoice: null,
+      activityLogs: [
+        { id: 1, name: "Sarah Miller", amount: 120, paymentType: "Paid" },
+        { id: 2, name: "Bill Created", amount: 480, paymentType: "Created" },
+      ],
+      claimants: [
+        { claimantId: "usr_2", claimantName: "Sarah Miller", amount: 120, isPaid: true, receipt: null },
+        { claimantId: "usr_3", claimantName: "Alex Chen", amount: 120, isPaid: false, receipt: null },
+        { claimantId: "usr_4", claimantName: "Zaid Omar", amount: 120, isPaid: false, receipt: null },
       ],
     },
     {
-      id: 2,
-      description: "Supermarket & Cooking Supplies 🛒",
-      amount: 760,
-      date: "2026-11-04T15:30:00",
+      billId: 102,
+      id: 102,
+      description: "House Cleaning & Maintenance 🧹",
+      ownerName: "Husam (You)",
+      billOwner: "Husam (You)",
+      createDate: "2026-11-05T14:30:00",
+      date: "2026-11-05T14:30:00",
+      total: 360,
+      amount: 360,
+      isRequired: true,
+      invoice: null,
+      activityLogs: [
+        { id: 3, name: "Bill Created", amount: 360, paymentType: "Created" },
+      ],
+      claimants: [
+        { claimantId: "usr_2", claimantName: "Sarah Miller", amount: 120, isPaid: false, receipt: null },
+        { claimantId: "usr_3", claimantName: "Alex Chen", amount: 120, isPaid: false, receipt: null },
+      ],
+    },
+  ],
+  // Archived Bills (Bills that are fully settled or closed)
+  archivedBills: [
+    {
+      billId: 201,
+      id: 201,
+      description: "Water & Electricity Utilities (October) ⚡",
+      ownerName: "Husam (You)",
+      billOwner: "Husam (You)",
+      createDate: "2026-10-15T09:00:00",
+      date: "2026-10-15T09:00:00",
+      total: 640,
+      amount: 640,
+      isRequired: false,
+      invoice: null,
+      activityLogs: [
+        { id: 4, name: "Sarah Miller", amount: 160, paymentType: "Paid" },
+        { id: 5, name: "Alex Chen", amount: 160, paymentType: "Paid" },
+        { id: 6, name: "Zaid Omar", amount: 160, paymentType: "Settled" },
+      ],
+      claimants: [
+        { claimantId: "usr_2", claimantName: "Sarah Miller", amount: 160, isPaid: true, receipt: null },
+        { claimantId: "usr_3", claimantName: "Alex Chen", amount: 160, isPaid: true, receipt: null },
+        { claimantId: "usr_4", claimantName: "Zaid Omar", amount: 160, isPaid: true, receipt: null },
+      ],
+    },
+  ],
+  // Other Bills in group where current user owes debt (shown on MainPage)
+  otherBills: [
+    {
+      billId: 301,
+      id: 301,
+      description: "Weekly Grocery & Supplies 🛒",
       billOwner: "Sarah Miller",
-      ownerId: "usr_2",
+      amount: 190,
+      total: 760,
+      date: "2026-11-04T15:30:00",
+      createDate: "2026-11-04T15:30:00",
       iban: "TR440006100511123456789033",
-      isSettlement: false,
-      isPayed: false,
-      paidAmount: 380,
-      remainingAmount: 380,
-      debts: [
-        { id: 201, fromUserId: "usr_1", fromUserName: "Husam (You)", toUserId: "usr_2", amount: 190, isPaid: false },
-        { id: 202, fromUserId: "usr_3", fromUserName: "Alex Chen", toUserId: "usr_2", amount: 190, isPaid: true },
-        { id: 203, fromUserId: "usr_4", fromUserName: "Zaid Omar", toUserId: "usr_2", amount: 190, isPaid: false },
-      ],
+      isRequired: false,
+      invoice: null,
+      isPaid: false,
     },
     {
-      id: 3,
-      description: "Electricity & Heating Utility ⚡",
-      amount: 920,
-      date: "2026-10-28T09:15:00",
+      billId: 302,
+      id: 302,
+      description: "Central Heating & Gas Bill ♨️",
       billOwner: "Alex Chen",
-      ownerId: "usr_3",
+      amount: 220,
+      total: 880,
+      date: "2026-11-02T10:15:00",
+      createDate: "2026-11-02T10:15:00",
       iban: "TR550006100511123456789044",
-      isSettlement: false,
-      isPayed: true,
-      paidAmount: 920,
-      remainingAmount: 0,
-      debts: [
-        { id: 301, fromUserId: "usr_1", fromUserName: "Husam (You)", toUserId: "usr_3", amount: 230, isPaid: true },
-        { id: 302, fromUserId: "usr_2", fromUserName: "Sarah Miller", toUserId: "usr_3", amount: 230, isPaid: true },
-        { id: 303, fromUserId: "usr_4", fromUserName: "Zaid Omar", toUserId: "usr_3", amount: 230, isPaid: true },
-      ],
+      isRequired: true,
+      invoice: null,
+      isPaid: false,
     },
   ],
 };
@@ -98,7 +147,13 @@ function getState() {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_STATE));
       return JSON.parse(JSON.stringify(INITIAL_STATE));
     }
-    return JSON.parse(raw);
+    const parsed = JSON.parse(raw);
+    // Sanity check to make sure myBills and archivedBills exist
+    if (!Array.isArray(parsed.myBills) || !Array.isArray(parsed.archivedBills)) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(INITIAL_STATE));
+      return JSON.parse(JSON.stringify(INITIAL_STATE));
+    }
+    return parsed;
   } catch {
     return JSON.parse(JSON.stringify(INITIAL_STATE));
   }
@@ -120,7 +175,7 @@ export const demoStore = {
 
   login(email, password) {
     const state = getState();
-    const token = "mock-jwt-token-" + Date.now();
+    const token = "mock-jwt-token-demo-" + Date.now();
     localStorage.setItem("token", token);
     return {
       success: true,
@@ -139,7 +194,7 @@ export const demoStore = {
       iban: iban || "TR000000000000000000000000",
     };
     saveState(state);
-    const token = "mock-jwt-token-" + Date.now();
+    const token = "mock-jwt-token-demo-" + Date.now();
     localStorage.setItem("token", token);
     return {
       success: true,
@@ -181,7 +236,7 @@ export const demoStore = {
     const state = getState();
     if (!state.group) {
       state.group = JSON.parse(JSON.stringify(INITIAL_STATE.group));
-      state.group.code = code || "BM-8921";
+      state.group.code = code || "MB-8921";
     }
     saveState(state);
     return {
@@ -192,8 +247,10 @@ export const demoStore = {
 
   kickMember(memberId) {
     const state = getState();
-    if (state.group) {
-      state.group.members = state.group.members.filter((m) => m.id !== memberId);
+    if (state.group && state.group.members) {
+      state.group.members = state.group.members.filter(
+        (m) => m.userId !== memberId && m.id !== memberId
+      );
       saveState(state);
     }
     return {
@@ -210,23 +267,24 @@ export const demoStore = {
     };
   },
 
+  // Main Page Bills: List of bills where current user owes debt
   getBills() {
     const state = getState();
-    const currentUserId = state.user?.id || "usr_1";
+    const activeDebts = (state.otherBills || []).filter((b) => !b.isPaid);
 
-    let totalDebtsAmount = 0;
+    // Total debts user owes
+    const totalDebtsAmount = activeDebts.reduce(
+      (sum, b) => sum + (Number(b.amount) || 0),
+      0
+    );
+
+    // Receivables: amounts other members owe you across your myBills
     let receivables = 0;
-
-    state.bills.forEach((bill) => {
-      if (bill.debts) {
-        bill.debts.forEach((debt) => {
-          if (!debt.isPaid) {
-            if (debt.fromUserId === currentUserId) {
-              totalDebtsAmount += Number(debt.amount) || 0;
-            }
-            if (debt.toUserId === currentUserId) {
-              receivables += Number(debt.amount) || 0;
-            }
+    (state.myBills || []).forEach((bill) => {
+      if (Array.isArray(bill.claimants)) {
+        bill.claimants.forEach((c) => {
+          if (!c.isPaid) {
+            receivables += Number(c.amount) || 0;
           }
         });
       }
@@ -235,107 +293,94 @@ export const demoStore = {
     return {
       success: true,
       data: {
-        bills: state.bills,
+        bills: activeDebts,
         totalDebtsAmount,
         receivables,
       },
     };
   },
 
+  // Bills Page: My Active Bills
   getMyBills() {
     const state = getState();
-    const currentUserId = state.user?.id || "usr_1";
-    const myBills = state.bills.filter(
-      (b) => b.ownerId === currentUserId && !b.isPayed
-    );
     return {
       success: true,
-      data: myBills,
+      data: state.myBills || [],
     };
   },
 
+  // Bills Page: Archived Bills
   getArchivedBills() {
     const state = getState();
-    const archived = state.bills.filter((b) => b.isPayed);
     return {
       success: true,
-      data: archived,
+      data: state.archivedBills || [],
     };
   },
 
+  // Create Bill
   createBill(formData) {
     const state = getState();
     const currentUserId = state.user?.id || "usr_1";
+    const currentUserName = state.user?.fullName || "Husam (You)";
 
     let description = "New Bill";
-    let amount = 100;
-    let debtors = [];
+    let total = 100;
+    let requiredReceipt = false;
+    let selectedUserIds = [];
 
     if (formData instanceof FormData) {
-      description = formData.get("description") || description;
-      amount = Number(formData.get("amount")) || amount;
-      const rawDebtors = formData.get("debtors");
-      if (rawDebtors) {
-        try {
-          debtors = typeof rawDebtors === "string" ? JSON.parse(rawDebtors) : rawDebtors;
-        } catch {
-          debtors = [];
-        }
+      description = formData.get("Description") || formData.get("description") || description;
+      total = Number(formData.get("Total") || formData.get("total")) || total;
+      requiredReceipt = formData.get("RequiredReceipt") === "true";
+
+      const allUsers = formData.getAll("BillUsersId");
+      if (allUsers && allUsers.length > 0) {
+        selectedUserIds = allUsers.map(String);
       }
     } else if (typeof formData === "object" && formData !== null) {
       description = formData.description || description;
-      amount = Number(formData.amount) || amount;
-      debtors = formData.debtors || [];
+      total = Number(formData.total) || total;
+      requiredReceipt = Boolean(formData.requiredReceipt);
     }
 
     const members = state.group?.members || [];
-    const splits = [];
+    const targetMembers = selectedUserIds.length > 0
+      ? members.filter((m) => selectedUserIds.includes(String(m.userId || m.id)))
+      : members.filter((m) => (m.userId || m.id) !== currentUserId);
 
-    if (debtors.length > 0) {
-      debtors.forEach((d, idx) => {
-        const mem = members.find((m) => m.id === d.userId) || { fullName: `Member ${idx + 1}` };
-        splits.push({
-          id: Date.now() + idx,
-          fromUserId: d.userId,
-          fromUserName: mem.fullName,
-          toUserId: currentUserId,
-          amount: Number(d.amount) || 0,
-          isPaid: false,
-        });
-      });
-    } else {
-      // Default split across members
-      const splitAmount = Math.round(amount / (members.length || 1));
-      members.forEach((m, idx) => {
-        if (m.id !== currentUserId) {
-          splits.push({
-            id: Date.now() + idx,
-            fromUserId: m.id,
-            fromUserName: m.fullName,
-            toUserId: currentUserId,
-            amount: splitAmount,
-            isPaid: false,
-          });
-        }
-      });
-    }
+    const splitCount = targetMembers.length > 0 ? targetMembers.length + 1 : 1;
+    const splitAmount = Math.round(total / splitCount);
 
+    const claimants = targetMembers.map((m) => ({
+      claimantId: m.userId || m.id,
+      claimantName: m.fullName,
+      amount: splitAmount,
+      isPaid: false,
+      receipt: null,
+    }));
+
+    const now = new Date().toISOString();
     const newBill = {
+      billId: Date.now(),
       id: Date.now(),
       description,
-      amount,
-      date: new Date().toISOString(),
-      billOwner: state.user?.fullName || "You",
-      ownerId: currentUserId,
-      iban: state.user?.iban || "TR330006100511123456789012",
-      isSettlement: false,
-      isPayed: false,
-      paidAmount: 0,
-      remainingAmount: amount,
-      debts: splits,
+      ownerName: currentUserName,
+      billOwner: currentUserName,
+      createDate: now,
+      date: now,
+      total,
+      amount: total,
+      isRequired: requiredReceipt,
+      invoice: null,
+      activityLogs: [
+        { id: Date.now(), name: "Bill Created", amount: total, paymentType: "Created" },
+      ],
+      claimants,
     };
 
-    state.bills.unshift(newBill);
+    if (!Array.isArray(state.myBills)) state.myBills = [];
+    state.myBills.unshift(newBill);
     saveState(state);
 
     return {
@@ -345,29 +390,21 @@ export const demoStore = {
     };
   },
 
+  // Pay Bill (Settle a debt user owes)
   payBill(formData) {
     const state = getState();
     let billId = null;
-    let debtId = null;
 
     if (formData instanceof FormData) {
-      billId = Number(formData.get("billId"));
-      debtId = Number(formData.get("debtId"));
+      billId = Number(formData.get("BillId") || formData.get("billId"));
     } else if (typeof formData === "object" && formData !== null) {
-      billId = Number(formData.billId);
-      debtId = Number(formData.debtId);
+      billId = Number(formData.BillId || formData.billId);
     }
 
-    const bill = state.bills.find((b) => b.id === billId);
-    if (bill && bill.debts) {
-      const debt = bill.debts.find((d) => d.id === debtId || d.fromUserId === state.user?.id);
-      if (debt) {
-        debt.isPaid = true;
-        bill.paidAmount = (bill.paidAmount || 0) + debt.amount;
-        bill.remainingAmount = Math.max(0, bill.amount - bill.paidAmount);
-        if (bill.debts.every((d) => d.isPaid)) {
-          bill.isPayed = true;
-        }
+    if (billId && Array.isArray(state.otherBills)) {
+      const bill = state.otherBills.find((b) => b.billId === billId || b.id === billId);
+      if (bill) {
+        bill.isPaid = true;
       }
     }
     saveState(state);
@@ -377,13 +414,36 @@ export const demoStore = {
     };
   },
 
+  // Settlement (Clear mutual debt between two bills)
   settleBill(myBillId, otherBillId) {
     const state = getState();
-    const myBill = state.bills.find((b) => b.id === Number(myBillId));
-    const otherBill = state.bills.find((b) => b.id === Number(otherBillId));
+    const myBill = (state.myBills || []).find(
+      (b) => b.billId === Number(myBillId) || b.id === Number(myBillId)
+    );
+    const otherBill = (state.otherBills || []).find(
+      (b) => b.billId === Number(otherBillId) || b.id === Number(otherBillId)
+    );
 
-    if (myBill) myBill.isPayed = true;
-    if (otherBill) otherBill.isPayed = true;
+    if (otherBill) {
+      otherBill.isPaid = true;
+    }
+
+    if (myBill) {
+      if (Array.isArray(myBill.claimants)) {
+        myBill.claimants.forEach((c) => {
+          if (otherBill && c.claimantName === otherBill.billOwner) {
+            c.isPaid = true;
+          }
+        });
+      }
+      if (!Array.isArray(myBill.activityLogs)) myBill.activityLogs = [];
+      myBill.activityLogs.unshift({
+        id: Date.now(),
+        name: otherBill?.billOwner || "Member",
+        amount: otherBill?.amount || 0,
+        paymentType: "Settled",
+      });
+    }
 
     saveState(state);
     return {
@@ -392,9 +452,13 @@ export const demoStore = {
     };
   },
 
+  // Delete Bill
   deleteBill(billId) {
     const state = getState();
-    state.bills = state.bills.filter((b) => b.id !== Number(billId));
+    const targetId = Number(billId);
+    if (Array.isArray(state.myBills)) {
+      state.myBills = state.myBills.filter((b) => b.billId !== targetId && b.id !== targetId);
+    }
     saveState(state);
     return {
       success: true,
@@ -402,17 +466,24 @@ export const demoStore = {
     };
   },
 
+  // Edit Bill
   editBill(content) {
     const state = getState();
-    const bill = state.bills.find((b) => b.id === Number(content?.billId));
-    if (bill && content) {
-      if (content.description) bill.description = content.description;
-      if (content.amount) bill.amount = Number(content.amount);
+    const targetId = Number(content?.billId);
+    if (Array.isArray(state.myBills)) {
+      const bill = state.myBills.find((b) => b.billId === targetId || b.id === targetId);
+      if (bill) {
+        if (content.description) bill.description = content.description;
+        if (content.total != null) {
+          bill.total = Number(content.total);
+          bill.amount = Number(content.total);
+        }
+      }
     }
     saveState(state);
     return {
       success: true,
-      data: bill,
+      message: "Bill updated (Demo Mode)",
     };
   },
 };

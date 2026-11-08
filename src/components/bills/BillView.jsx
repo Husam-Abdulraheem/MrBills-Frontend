@@ -44,7 +44,7 @@ function BillView(props) {
         {/* Upper Part */}
         <div className="flex justify-between overflow-hidden">
           <p className="self-center opacity-60 text-[10px]">
-            {props.bill.date.split("T")[0]}
+            {(props.bill.date || props.bill.createDate || "").split("T")[0]}
           </p>
           <h2 className="text-lg text-end font-bold w-[80%] overflow-hidden">
             {props.bill.description}
