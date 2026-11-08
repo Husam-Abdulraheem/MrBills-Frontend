@@ -1,0 +1,36 @@
+import { useState  } from "react";
+
+import dekont from "../../../assets/pdf/dekont.jpg";
+function DekontDialog() {
+
+    const [isOpen, setIsOpen] = useState(false);
+    return ( 
+        <>
+        
+       
+        {/* onClick={() =>setIsOpen(true)}  */}
+        <svg className="size-6 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" >
+            <path fillRule="evenodd" d="M9 1.5H5.625c-1.036 0-1.875.84-1.875 1.875v17.25c0 1.035.84 1.875 1.875 1.875h12.75c1.035 0 1.875-.84 1.875-1.875V12.75A3.75 3.75 0 0 0 16.5 9h-1.875a1.875 1.875 0 0 1-1.875-1.875V5.25A3.75 3.75 0 0 0 9 1.5Zm6.61 10.936a.75.75 0 1 0-1.22-.872l-3.236 4.53L9.53 14.47a.75.75 0 0 0-1.06 1.06l2.25 2.25a.75.75 0 0 0 1.14-.094l3.75-5.25Z" clipRule="evenodd" />
+            <path d="M12.971 1.816A5.23 5.23 0 0 1 14.25 5.25v1.875c0 .207.168.375.375.375H16.5a5.23 5.23 0 0 1 3.434 1.279 9.768 9.768 0 0 0-6.963-6.963Z" />
+        </svg>
+       
+
+        {isOpen && (
+
+            <>
+                {/* Transparent background */}
+                <div onClick={() => setIsOpen(false)} className="fixed bg-black bg-opacity-80 top-0 left-0 right-0 w-full h-full content-center   z-50 overflow-auto " ></div>
+                
+                {/* Dialog */}
+                <div  className="pop_up over  flex  items-center justify-center p-5  fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-[90%]  border border-[var(--yellow)]  rounded-2xl  shadow-md z-[1000]   bg-neutral-900 transition-all duration-300">
+
+                    <img src={dekont} className="h-fit w-fit overflow-scroll max-w-full max-h-full"  />
+                    
+                </div>
+            </>
+        )} 
+    </>
+     );
+}
+
+export default DekontDialog;

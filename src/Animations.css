@@ -1,0 +1,223 @@
+.slideDownAndUp {
+    position: fixed; 
+    left: 0; 
+    right: 0; 
+    margin-inline: auto; 
+    width: fit-content;
+    /* border-bottom:  red solid; */
+    
+    animation: slideDownAndUp 5s ease-in-out;
+}
+.slideDownAndUp::before {
+  content: '';
+  position: fixed;
+  top: 95%;
+  left: 0;
+  height: 10%;
+  border-bottom: 4px solid red;
+  animation: borderRight 5s ease-in-out ;
+}
+
+
+.slideDownAndUpSuccess {
+  position: fixed; 
+  left: 0; 
+  right: 0; 
+  margin-inline: auto; 
+  width: fit-content;
+  /* border-bottom:  red solid; */
+  
+  animation: slideDownAndUp 5s ease-in-out;
+}
+.slideDownAndUpSuccess::before {
+content: '';
+position: fixed;
+top: 95%;
+left: 0;
+height: 10%;
+border-bottom: 4px solid green;
+animation: borderRight 5s ease-in-out ;
+}
+
+@keyframes slideDownAndUp {
+    0% {
+      transform: translateY(-100%); 
+    }
+    5% {
+      transform: translateY(20%);
+    }
+    10% {
+      transform: translateY(0);
+    }
+    90% {
+      transform: translateY(0);
+    }
+    95% {
+      transform: translateY(20%);
+    }
+    100% {
+      transform: translateY(-150%);
+ 
+    }
+}
+
+
+@keyframes borderRight {
+  0% {
+
+    width: 100%;
+    
+  }
+ 
+  100% {
+    width: 0%;
+  }
+}
+
+
+
+.right_arrow {
+  animation: lookAtRight ease-in 0.1s ;
+}
+
+
+.bottom_arrow {
+  animation: lookAtBottom ease-in 0.1s ;
+}
+@keyframes lookAtRight {
+  0% {
+
+    transform: rotate(90deg);
+    
+  }
+ 
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+/*  */
+
+@keyframes lookAtBottom {
+  0% {
+
+    transform: rotate(-90deg);
+    
+  }
+ 
+  100% {
+    transform: rotate(0deg);
+  }
+}
+
+
+
+
+.spin:active{
+  animation: spin 0.5s ease-in forwards;
+  
+}
+
+@keyframes spin {
+  0% {
+
+    transform: rotate(0deg);
+    
+  }
+  100% {
+    transform: rotate(90deg);
+  }
+}
+
+
+.flip{
+  overflow: hidden;
+  animation: flip 0.2s linear ;
+  
+}
+
+.reversed_flip{
+  overflow: hidden;
+  animation: reversed_flip 0.2s ease-in-out  ;
+}
+
+
+
+
+
+@keyframes flip {
+  0% {
+
+    transform: rotateX(0deg) ;
+
+    
+  }
+
+  100% {
+    transform: rotateX(90deg) ;
+ 
+  }
+}
+
+
+@keyframes reversed_flip {
+  0% {
+
+    transform: rotateX(90deg)  ;
+
+    
+  }
+
+  100% {
+    transform: rotateX(0deg);
+ 
+  }
+}
+
+.pop_up{
+  animation: pop_up 0.5s ease-in-out forwards;
+ 
+}
+
+@keyframes pop_up {
+  0% {
+
+    top: 10%;
+   
+    
+  }
+
+
+  60%{
+    top: 65%;
+  }
+
+  100% {
+    top: 50%;
+    
+    
+  }
+}
+
+
+
+.slide{
+  animation: slide 0.5s ease-in-out forwards;
+}
+
+@keyframes slide {
+  0% {
+    transform: translateY(-100%);
+  }
+  100% {
+    transform: translateY(0%);
+  }
+}
+
+
+
+
+
+
+

@@ -1,0 +1,68 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body  {
+  font-family: "Lato", "cairo", sans-serif;
+  background-color: black;
+  height: 100vh;
+  overflow: hidden;
+}
+
+#root {
+  height: 100%;
+}
+
+.scrolling_container{
+  scroll-snap-type: x mandatory;
+  overflow-x: scroll;
+}
+
+
+.recommended::before{
+  content: "مُستَحسَن ";
+  position: absolute;
+  top: -5%;
+  width: 102%;
+  left: -1%;
+
+  border-top-left-radius: 10px;
+  border-top-right-radius: 10px;
+  background-color: var(--yellow);
+  color: var(--dark);
+  
+}
+
+@keyframes shining-border {
+  0% { background-position: 0% 50%; }
+  100% { background-position: 200% 50%; }
+}
+
+.shining-border {
+  position: relative;
+  padding: 3px; /* سمك الإطار */
+  border-radius: 9999px;
+  background: linear-gradient(
+    270deg,
+    #000000,
+    #f7eb7f,
+    #f59e0b,
+    #fde68a,
+    #facc15
+  );
+  background-size: 200% 200%;
+  animation: shining-border 3s ease-in-out infinite;
+}
+
+.content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: black;
+  font-weight: 600;
+  background-color: #facc15;
+  border-radius: 9999px;
+  user-select: none;
+}

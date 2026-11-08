@@ -1,0 +1,39 @@
+@import url('https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root{
+    --gray : #dddce0;
+    --yellow : #fab92d;
+    --yellowHover : #d69200;
+    --dark : #171715;
+    --lightDark : #2e2e2e;
+    --darkBlue : #2a2e31;
+    --golden: linear-gradient(315deg, #facc6b 0%, #ffaa00 74%);
+}
+
+html {
+  font-size: 14px; /* الحجم الأساسي للخط */
+}
+
+* {
+  -webkit-user-select: none;
+  -moz-user-select: none;    
+  -ms-user-select: none;    
+  user-select: none;         
+}
+input, textarea, button {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}
+
+body  {
+    @apply font-cairo;
+    padding-top: env(safe-area-inset-top);
+    padding-bottom: env(safe-area-inset-bottom);
+    background-color: #000000;
+}
