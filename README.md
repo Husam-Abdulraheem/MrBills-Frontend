@@ -1,4 +1,4 @@
-# 💳 BillMate (Frontend Web Application)
+# 💳 Mr. Bills (Frontend Web Application)
 
 [![React 18](https://img.shields.io/badge/React-18.3-61DAFB?logo=react&logoColor=black)](https://reactjs.org/)
 [![Vite](https://img.shields.io/badge/Vite-5.4-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/)
@@ -6,9 +6,9 @@
 [![i18next](https://img.shields.io/badge/i18n-Multi--Language-26A69A)](https://www.i18next.com/)
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
-> **BillMate** is a modern, responsive web application for group expense tracking, smart bill splitting, debt settlements, and group collaboration. Built with **React 18**, **Tailwind CSS**, and **Vite**, featuring full multi-language and RTL support (Arabic, English, Turkish).
+> **Mr. Bills** is a modern, responsive web application for group expense tracking, smart bill splitting, debt settlements, and group collaboration. Built with **React 18**, **Tailwind CSS**, and **Vite**, featuring full multi-language and RTL support (Arabic, English, Turkish).
 
-🔗 **Backend Repository:** [BillMate-Backend (.NET 8 REST API)](https://github.com/Husam-Abdulraheem/BillMate-Backend)
+🔗 **Backend Repository:** [MrBills-Backend (.NET 8 REST API)](https://github.com/Husam-Abdulraheem/MrBills-Backend)
 
 ---
 
@@ -87,8 +87,8 @@ src/
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/Husam-Abdulraheem/BillMate-Frontend.git
-cd BillMate-Frontend
+git clone https://github.com/Husam-Abdulraheem/MrBills-Frontend.git
+cd MrBills-Frontend
 ```
 
 ### 2. Install dependencies
