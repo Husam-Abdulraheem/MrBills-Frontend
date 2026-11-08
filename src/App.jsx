@@ -27,6 +27,7 @@ import Waiting from "./components/others/Waiting";
 import SupportButton from "./components/others/SupportButton";
 import ShutdownScreen from "./components/others/ShutdownScreen";
 import { appConfig } from "./appConfig";
+import DemoBanner from "./components/others/DemoBanner";
 
 function App() {
   document.addEventListener(
@@ -41,6 +42,14 @@ function App() {
   const { i18n: i18next } = useTranslation();
   const direction = i18next.language === "ar" ? "rtl" : "ltr";
 
+  // Support both standalone hosting and subpath hosting (e.g. /demo/mr-bills or /ar/demo/mr-bills)
+  const getBasePath = () => {
+    if (typeof window === "undefined") return "";
+    const pathname = window.location.pathname;
+    const match = pathname.match(/^(\/(ar|en|tr))?\/demo\/mr-bills/);
+    return match ? match[0] : "";
+  };
+
   // Check for app shutdown
   if (appConfig.IS_APP_SHUTDOWN) {
     return (
@@ -51,7 +60,8 @@ function App() {
   }
   return (
     <div dir={direction}>
-      <BrowserRouter>
+      <BrowserRouter basename={getBasePath()}>
+        <DemoBanner />
         <ProfileContext.Provider value={{ profile, setProfile }}>
           <GroupContext.Provider value={{ group, setGroup }}>
             <Routes>

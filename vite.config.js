@@ -12,5 +12,5 @@ export default defineConfig({
   build: {
     outDir: 'dist',
   },
-  base: '/', // <-- This is crucial for Vercel
+  base: process.env.VITE_BASE_PATH || '/demo/mr-bills/',
 });
